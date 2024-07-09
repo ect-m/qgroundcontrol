@@ -107,6 +107,8 @@
         <file alias="Vehicle/GeneratorFact.json">src/Vehicle/FactGroups/GeneratorFact.json</file>
         <file alias="Vehicle/EFIFact.json">src/Vehicle/FactGroups/EFIFact.json</file>
         <file alias="Vehicle/GimbalFact.json">src/Gimbal/GimbalFact.json</file>
+        <file alias="Vehicle/LTEFact.json">src/Vehicle/FactGroups/LTEFact.json</file>
+        <file alias="Vehicle/RepeaterFact.json">src/Vehicle/FactGroups/RepeaterFact.json</file>
         <file alias="Video.SettingsGroup.json">src/Settings/Video.SettingsGroup.json</file>
         <file alias="VTOLLandingPattern.FactMetaData.json">src/MissionManager/VTOLLandingPattern.FactMetaData.json</file>
         <file alias="Viewer3D.SettingsGroup.json">src/Settings/Viewer3D.SettingsGroup.json</file>

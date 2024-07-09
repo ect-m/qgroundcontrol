@@ -78,7 +78,7 @@ QGC_LOGGING_CATEGORY(VehicleLog, "VehicleLog")
 #define SET_HOME_TERRAIN_ALT_MIN -500
 
 // After a second GCS has requested control and we have given it permission to takeover, we will remove takeover permission automatically after this timeout
-// If the second GCS didn't get control 
+// If the second GCS didn't get control
 #define REQUEST_OPERATOR_CONTROL_ALLOW_TAKEOVER_TIMEOUT_MSECS 10000
 
 const QString guided_mode_not_supported_by_vehicle = QObject::tr("Guided mode not supported by Vehicle.");
@@ -338,6 +338,9 @@ void Vehicle::_commonInit()
     _addFactGroup(&_efiFactGroup,               _efiFactGroupName);
     _addFactGroup(&_rpmFactGroup,               _rpmFactGroupName);
     _addFactGroup(&_terrainFactGroup,           _terrainFactGroupName);
+
+    _addFactGroup(&_lteFactGroup,               _lteFactGroupName);
+    _addFactGroup(&_repeaterFactGroup,          _repeaterFactGroupName);
 
     // Add firmware-specific fact groups, if provided
     QMap<QString, FactGroup*>* fwFactGroups = _firmwarePlugin->factGroups();
@@ -653,7 +656,7 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
     }
     case MAVLINK_MSG_ID_CONTROL_STATUS:
         _handleControlStatus(message);
-        break;   
+        break;
     case MAVLINK_MSG_ID_COMMAND_LONG:
         _handleCommandLong(message);
         break;
@@ -2927,7 +2930,7 @@ void Vehicle::_waitForMavlinkMessageMessageReceivedHandler(const mavlink_message
         // We use any incoming message as a trigger to check timeouts on message requests
 
         for (auto& compIdEntry : _requestMessageInfoMap) {
-            for (auto requestMessageInfo : compIdEntry) {    
+            for (auto requestMessageInfo : compIdEntry) {
                 if (requestMessageInfo->messageWaitElapsedTimer.isValid() && requestMessageInfo->messageWaitElapsedTimer.elapsed() > (qgcApp()->runningUnitTests() ? 50 : 1000)) {
                     auto resultHandler      = requestMessageInfo->resultHandler;
                     auto resultHandlerData  = requestMessageInfo->resultHandlerData;
@@ -3949,7 +3952,7 @@ void Vehicle::sendGripperAction(QGCMAVLink::GRIPPER_OPTIONS gripperOption)
         case QGCMAVLink::Invalid_option:
             qDebug("unknown function");
             break;
-        default: 
+        default:
             break;
     }
 }
@@ -4008,7 +4011,7 @@ void Vehicle::startTimerRevertAllowTakeover()
     _timerRevertAllowTakeover.setInterval(operatorControlTakeoverTimeoutMsecs());
     // Disconnect any previous connections to avoid multiple handlers
     disconnect(&_timerRevertAllowTakeover, &QTimer::timeout, nullptr, nullptr);
-    
+
     connect(&_timerRevertAllowTakeover, &QTimer::timeout, this, [this](){
         if (MAVLinkProtocol::instance()->getSystemId() == _sysid_in_control) {
             this->requestOperatorControl(false);
@@ -4062,12 +4065,12 @@ void Vehicle::_requestOperatorControlAckHandler(void* resultHandlerData, int com
         default:
             break;
     }
-    
+
     Vehicle* vehicle = static_cast<Vehicle*>(resultHandlerData);
     if (!vehicle) {
         return;
     }
-    
+
     if (ack.result == MAV_RESULT_ACCEPTED) {
         qCDebug(VehicleLog) << "Operator control request accepted";
     } else {
