@@ -323,6 +323,9 @@ void Vehicle::_commonInit(LinkInterface* link)
     _addFactGroup(&_rpmFactGroup,               _rpmFactGroupName);
     _addFactGroup(&_terrainFactGroup,           _terrainFactGroupName);
 
+    _addFactGroup(&_lteFactGroup,               _lteFactGroupName);
+    _addFactGroup(&_repeaterFactGroup,          _repeaterFactGroupName);
+
     // Add firmware-specific fact groups, if provided
     QMap<QString, FactGroup*>* fwFactGroups = _firmwarePlugin->factGroups();
     if (fwFactGroups) {
