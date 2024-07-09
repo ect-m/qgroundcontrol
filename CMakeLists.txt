@@ -20,7 +20,9 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_INCLUDE_CURRENT_DIR OFF)
 
-set(CMAKE_PREFIX_PATH "/opt/Qt/6.6.3/gcc_64/lib/cmake")
+if (UNIX)
+    set(CMAKE_PREFIX_PATH "/opt/Qt/6.6.3/gcc_64/lib/cmake")
+endif (UNIX)
 
 include(FeatureSummary)
 include(CMakePrintHelpers)
@@ -297,7 +299,7 @@ elseif(ANDROID)
 endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE qgc)
-target_link_libraries(${PROJECT_NAME} PRIVATE Custom)
+#target_link_libraries(${PROJECT_NAME} PRIVATE Custom)
 
 #######################################################
 #               Testing Configuration
