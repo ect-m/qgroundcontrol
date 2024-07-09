@@ -20,6 +20,8 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_INCLUDE_CURRENT_DIR OFF)
 
+set(CMAKE_PREFIX_PATH "/opt/Qt/6.6.3/gcc_64/lib/cmake")
+
 include(FeatureSummary)
 include(CMakePrintHelpers)
 include(FetchContent)

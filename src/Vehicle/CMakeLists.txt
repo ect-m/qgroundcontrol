@@ -81,6 +81,10 @@ qt_add_library(Vehicle STATIC
 	VehicleLocalPositionFactGroup.h
 	VehicleLocalPositionSetpointFactGroup.cc
 	VehicleLocalPositionSetpointFactGroup.h
+	VehicleLTEFactGroup.cc
+	VehicleLTEFactGroup.h
+	VehicleRepeaterFactGroup.cc
+	VehicleRepeaterFactGroup.h
 	VehicleObjectAvoidance.cc
 	VehicleObjectAvoidance.h
 	VehicleSetpointFactGroup.cc

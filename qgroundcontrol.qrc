@@ -395,6 +395,8 @@
         <file alias="Vehicle/DistanceSensorFact.json">src/Vehicle/DistanceSensorFact.json</file>
         <file alias="Vehicle/EscStatusFactGroup.json">src/Vehicle/EscStatusFactGroup.json</file>
         <file alias="Vehicle/EstimatorStatusFactGroup.json">src/Vehicle/EstimatorStatusFactGroup.json</file>
+        <file alias="Vehicle/LTEFact.json">src/Vehicle/LTEFact.json</file>
+        <file alias="Vehicle/RepeaterFact.json">src/Vehicle/RepeaterFact.json</file>
         <file alias="Vehicle/GPSFact.json">src/Vehicle/GPSFact.json</file>
         <file alias="Vehicle/GPSRTKFact.json">src/Vehicle/GPSRTKFact.json</file>
         <file alias="Vehicle/SetpointFact.json">src/Vehicle/SetpointFact.json</file>
