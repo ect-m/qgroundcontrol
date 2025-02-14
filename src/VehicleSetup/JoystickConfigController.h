@@ -45,11 +45,15 @@ public:
     Q_PROPERTY(bool pitchAxisMapped             READ pitchAxisMapped            NOTIFY pitchAxisMappedChanged)
     Q_PROPERTY(bool yawAxisMapped               READ yawAxisMapped              NOTIFY yawAxisMappedChanged)
     Q_PROPERTY(bool throttleAxisMapped          READ throttleAxisMapped         NOTIFY throttleAxisMappedChanged)
+    Q_PROPERTY(bool gimbalPitchAxisMapped       READ gimbalPitchAxisMapped      NOTIFY gimbalPitchAxisMappedChanged)
+    Q_PROPERTY(bool gimbalYawAxisMapped         READ gimbalYawAxisMapped        NOTIFY gimbalYawAxisMappedChanged)
 
     Q_PROPERTY(int  rollAxisReversed            READ rollAxisReversed           NOTIFY rollAxisReversedChanged)
     Q_PROPERTY(int  pitchAxisReversed           READ pitchAxisReversed          NOTIFY pitchAxisReversedChanged)
     Q_PROPERTY(int  yawAxisReversed             READ yawAxisReversed            NOTIFY yawAxisReversedChanged)
     Q_PROPERTY(int  throttleAxisReversed        READ throttleAxisReversed       NOTIFY throttleAxisReversedChanged)
+    Q_PROPERTY(bool gimbalPitchAxisReversed     READ gimbalPitchAxisReversed    NOTIFY gimbalPitchAxisReversedChanged)
+    Q_PROPERTY(bool gimbalYawAxisReversed       READ gimbalYawAxisReversed      NOTIFY gimbalYawAxisReversedChanged)
 
     Q_PROPERTY(bool deadbandToggle              READ getDeadbandToggle          WRITE setDeadbandToggle    NOTIFY deadbandToggled)
 
@@ -72,11 +76,15 @@ public:
     bool pitchAxisMapped                    () { return _rgFunctionAxisMapping[Joystick::pitchFunction]         != _axisNoAxis; }
     bool yawAxisMapped                      () { return _rgFunctionAxisMapping[Joystick::yawFunction]           != _axisNoAxis; }
     bool throttleAxisMapped                 () { return _rgFunctionAxisMapping[Joystick::throttleFunction]      != _axisNoAxis; }
+    bool gimbalYawAxisMapped                () { return _rgFunctionAxisMapping[Joystick::gimbalYawFunction]     != _axisNoAxis; }
+    bool gimbalPitchAxisMapped              () { return _rgFunctionAxisMapping[Joystick::gimbalPitchFunction]   != _axisNoAxis; }
 
     bool rollAxisReversed                   ();
     bool pitchAxisReversed                  ();
     bool yawAxisReversed                    ();
     bool throttleAxisReversed               ();
+    bool gimbalYawAxisReversed              ();
+    bool gimbalPitchAxisReversed            ();
 
     bool getDeadbandToggle                  ();
     void setDeadbandToggle                  (bool);
@@ -97,6 +105,10 @@ public:
         qreal   leftY;
         qreal   rightX;
         qreal   rightY;
+        qreal   bLeftX;
+        qreal   bLeftY;
+        qreal   bRightX;
+        qreal   bRightY;
     };
 
 signals:
@@ -106,10 +118,14 @@ signals:
     void pitchAxisMappedChanged             (bool mapped);
     void yawAxisMappedChanged               (bool mapped);
     void throttleAxisMappedChanged          (bool mapped);
+    void gimbalPitchAxisMappedChanged       (bool mapped);
+    void gimbalYawAxisMappedChanged         (bool mapped);
     void rollAxisReversedChanged            (bool reversed);
     void pitchAxisReversedChanged           (bool reversed);
     void yawAxisReversedChanged             (bool reversed);
     void throttleAxisReversedChanged        (bool reversed);
+    void gimbalPitchAxisReversedChanged     (bool reversed);
+    void gimbalYawAxisReversedChanged       (bool reversed);
     void deadbandToggled                    (bool value);
     void transmitterModeChanged             (int mode);
     void calibratingChanged                 ();
@@ -201,6 +217,10 @@ private:
     void _signalAllAttitudeValueChanges();
 
     void _setStatusText         (const QString& text);
+    int _centerPointForAxis		(int axis) const;
+    int _validMinValueForAxis	(int axis) const;
+    int _defaultMinValueForAxis (int axis) const;
+    int _moveDeltaForAxis		(int axis) const;
 
     stateStickPositions _sticksCentered;
     stateStickPositions _sticksThrottleUp;
@@ -211,6 +231,11 @@ private:
     stateStickPositions _sticksRollRight;
     stateStickPositions _sticksPitchUp;
     stateStickPositions _sticksPitchDown;
+
+    stateStickPositions _sticksGimbalPitchUp;
+    stateStickPositions _sticksGimbalPitchDown;
+    stateStickPositions _sticksGimbalYawLeft;
+    stateStickPositions _sticksGimbalYawRight;
 
     QList<qreal> _currentStickPositions;
 
@@ -233,12 +258,16 @@ private:
     int     _calStateReverseOldMapping;             ///< Previous mapping for axis being currently used to detect inversion
 
     static const int _calCenterPoint;
+    static const QList<int> _calCenterPointPerAxis;
     static const int _calValidMinValue;
+    static const QList<int> _calValidMinValuePerAxis;
     static const int _calValidMaxValue;
     static const int _calDefaultMinValue;
+    static const QList<int> _calDefaultMinValuePerAxis;
     static const int _calDefaultMaxValue;
     static const int _calRoughCenterDelta;
     static const int _calMoveDelta;
+    static const QList<int> _calMoveDeltaPerAxis;
     static const int _calSettleDelta;
     static const int _calMinDelta;
 

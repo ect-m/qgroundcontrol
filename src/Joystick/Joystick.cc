@@ -476,7 +476,6 @@ float Joystick::_adjustRange(int value, Calibration_t calibration, bool withDead
         correctedValue *= -1.0f;
     }
 
-#if 0
     qCDebug(JoystickLog) << "_adjustRange corrected:value:min:max:center:reversed:deadband:basis:normalized:length"
                             << correctedValue
                             << value
@@ -488,7 +487,6 @@ float Joystick::_adjustRange(int value, Calibration_t calibration, bool withDead
                             << axisBasis
                             << valueNormalized
                             << axisLength;
-#endif
 
     return std::max(-1.0f, std::min(correctedValue, 1.0f));
 }
@@ -623,6 +621,7 @@ void Joystick::_handleAxis()
         //-- Update axis
         for (int axisIndex = 0; axisIndex < _axisCount; axisIndex++) {
             int newAxisValue = _getAxis(axisIndex);
+//            qCDebug(JoystickValuesLog) << "axisIndex:newAxisValue" << axisIndex << newAxisValue;
             // Calibration code requires signal to be emitted even if value hasn't changed
             _rgAxisValues[axisIndex] = newAxisValue;
             emit rawAxisValueChanged(axisIndex, newAxisValue);
@@ -701,10 +700,10 @@ void Joystick::_handleAxis()
                     buttonPressedBits |= buttonBit;
                 }
             }
-            emit axisValues(roll, pitch, yaw, throttle);
+            emit axisValues(roll, pitch, yaw, throttle, gimbalPitch, gimbalYaw);
 
             uint16_t shortButtons = static_cast<uint16_t>(buttonPressedBits & 0xFFFF);
-            _activeVehicle->sendJoystickDataThreadSafe(roll, pitch, yaw, throttle, shortButtons);
+            _activeVehicle->sendJoystickDataThreadSafe(roll, pitch, yaw, throttle, gimbalPitch, gimbalYaw, shortButtons);
         }
     }
 }

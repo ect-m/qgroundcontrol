@@ -1243,6 +1243,27 @@ contains (CONFIG, QGC_DISABLE_INSTALLER_SETUP) {
 }
 
 DISTFILES += \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/AndroidManifest.xml \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/build.gradle \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradle.properties \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradle.properties \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradle.properties \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradle/wrapper/gradle-wrapper.jar \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradle/wrapper/gradle-wrapper.jar \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradle/wrapper/gradle-wrapper.jar \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradle/wrapper/gradle-wrapper.properties \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradle/wrapper/gradle-wrapper.properties \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradle/wrapper/gradle-wrapper.properties \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradlew \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradlew \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradlew \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradlew.bat \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradlew.bat \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/gradlew.bat \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/res/values/libs.xml \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/res/values/libs.xml \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/res/xml/qtprovider_paths.xml \
+    build/Android_Qt_6_6_3_Clang_arm64_v8a-Debug/ANDROID_PACKAGE_SOURCE_DIR/res/xml/qtprovider_paths.xml \
     src/QmlControls/QGroundControl/Specific/qmldir
 
 #

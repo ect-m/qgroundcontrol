@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 # This is causing master builds to fail. I'll figure it out once I get Stable out.
 #set -Eeuxo pipefail # https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
@@ -43,14 +43,14 @@ APPDIR=${TMPDIR}/$APP".AppDir"
 mkdir -p ${APPDIR}
 
 cd ${TMPDIR}
-wget -c --quiet http://ftp.us.debian.org/debian/pool/main/libs/libsdl2/libsdl2-2.0-0_2.0.2%2bdfsg1-6_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/libs/libsdl2/libsdl2-2.0-0_2.0.2%2bdfsg1-6_amd64.deb
 
 cd ${APPDIR}
 find ../ -name *.deb -exec dpkg -x {} . \;
 
 # copy libdirectfb-1.2.so.9
 cd ${TMPDIR}
-wget -c --quiet http://ftp.us.debian.org/debian/pool/main/d/directfb/libdirectfb-1.2-9_1.2.10.0-5.1_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/d/directfb/libdirectfb-1.2-9_1.2.10.0-5.1_amd64.deb
 mkdir libdirectfb
 dpkg -x libdirectfb-1.2-9_1.2.10.0-5.1_amd64.deb libdirectfb
 cp -L libdirectfb/usr/lib/x86_64-linux-gnu/libdirectfb-1.2.so.9 ${APPDIR}/usr/lib/x86_64-linux-gnu/
@@ -58,20 +58,20 @@ cp -L libdirectfb/usr/lib/x86_64-linux-gnu/libfusion-1.2.so.9 ${APPDIR}/usr/lib/
 cp -L libdirectfb/usr/lib/x86_64-linux-gnu/libdirect-1.2.so.9 ${APPDIR}/usr/lib/x86_64-linux-gnu/
 
 # copy QGroundControl release into appimage
-rsync -av --exclude=*.cpp --exclude=*.h --exclude=*.o --exclude="CMake*" --exclude="*.cmake" ${QGC_RELEASE_DIR}/* ${APPDIR}/
+rsync -av --exclude=*.cpp --exclude=*.h --exclude=*.o --exclude="CMake*" --exclude="*.cmake" ${QGC_RELEASE_DIR}/* ${APPDIR}/ > /dev/null
 rm -rf ${APPDIR}/package
 cp ${QGC_CUSTOM_LINUX_START_SH} ${APPDIR}/AppRun
 
 # copy icon
 cp ${QGC_CUSTOM_APP_ICON} ${APPDIR}/
 
-cat > ./QGroundControl.desktop <<\EOF
+cat > ${APPDIR}/QGroundControl.desktop <<EOF
 [Desktop Entry]
 Type=Application
 Name=${QGC_CUSTOM_APP_NAME}
 GenericName=${QGC_CUSTOM_GENERIC_NAME}
 Comment=UAS ground control station
-Icon=${QGC_CUSTOM_APP_ICON_NAME}
+Icon=${QGC_CUSTOM_APP_ICON}
 Exec=AppRun
 Terminal=false
 Categories=Utility;
