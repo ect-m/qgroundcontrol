@@ -116,7 +116,7 @@ public:
     /// @return false: custom build has automatically enabled a specific joystick
     virtual bool allowJoystickSelection() const { return true; }
 
-    virtual bool checkFirmwareVersion() const { return true; }
+    virtual bool checkFirmwareVersion() const { return false; }
 
     /// @return true: Guided actions will be disabled is there is no RC RSSI
     virtual bool guidedActionsRequireRCRSSI() const { return false; }
