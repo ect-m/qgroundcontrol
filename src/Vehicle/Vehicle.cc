@@ -2162,6 +2162,12 @@ void Vehicle::_activeVehicleChanged(Vehicle *newActiveVehicle)
         qCDebug(JoystickLog) << "Vehicle " << this->id() << " is the new active vehicle";
         _captureJoystick();
     }
+
+    sendMavCommand(10,
+               MAV_CMD_USER_1,
+               true,
+               31020.0f,        // ACTIVE_VEHICLE
+               newActiveVehicle == this ? 1.0f : 0.0f);
 }
 
 // tells the active joystick where to send data
