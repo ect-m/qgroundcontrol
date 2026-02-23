@@ -1,6 +1,7 @@
 name: Docker-Linux
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
